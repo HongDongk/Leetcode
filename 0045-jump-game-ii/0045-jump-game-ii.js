@@ -4,14 +4,15 @@
  */
 var jump = function(nums) {
     let answer = 0;
-    let maxx = 0;
-    let currentmax = 0;
+    let maxfar = 0;
+    let nowfar = 0;
 
     for(let i =0; i<nums.length-1; i++){
-        maxx = Math.max(maxx, i+nums[i]);
-        if(i === currentmax){
+        maxfar = Math.max(maxfar, i+nums[i]);
+
+        if(i === nowfar){
             answer++;
-            currentmax = maxx;
+            nowfar = maxfar;
         }
     }
 
