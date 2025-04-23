@@ -16,5 +16,3 @@ var maxProfit = function(prices) {
 
     return profit;    
 };
-
-prices = [8, 3, 6, 1, 7]
