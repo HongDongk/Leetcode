@@ -4,38 +4,39 @@
  * @return {number[]}
  */
 var findSubstring = function(s, words) {
-    const wordLen = words[0].length; // 단어 하나의 길이
-    const wordCount = words.length; // 단어 갯수
-    const totalLen = wordLen * wordCount; // 합친단어 길이
+    let info = {};
+    let answer = [];
 
-    const wordMap = {};
-    for (let word of words) {
-        wordMap[word] = (wordMap[word] || 0) + 1;
+    for(let i =0; i<words.length; i++){
+        if(info[words[i]]){
+            info[words[i]] += 1;
+        }else{
+            info[words[i]] = 1;
+        }
     }
 
-    const result = [];
 
-    for (let i = 0; i <= s.length - totalLen; i++) {
-        const seen = {};
+    for(let i =0; i<=s.length-(words[0].length*words.length); i++){
+        let seen = {};
         let j = 0;
 
-        while (j < wordCount) {
-            const wordStart = i + j * wordLen;
-            const word = s.slice(wordStart, wordStart + wordLen);
+        while(j < words.length){
+            let start = i + j*words[0].length;
+            let word = s.slice(start, start+words[0].length);
 
-            if (!wordMap[word]) break;
+            if(!info[word]) break;
 
             seen[word] = (seen[word] || 0) + 1;
 
-            if (seen[word] > wordMap[word]) break;
-
+            if(seen[word] > info[word]) break;
+            
             j++;
         }
 
-        if (j === wordCount) {
-            result.push(i);
+        if(j === words.length){
+            answer.push(i);
         }
     }
 
-    return result;
+    return answer;
 };
