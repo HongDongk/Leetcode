@@ -3,20 +3,16 @@
  * @return {number}
  */
 var majorityElement = function(nums) {
-    let candidate = nums[0];
-    let count = 1;
+    const info = {};
+    const threshold = Math.floor(nums.length / 2);
 
-    for(let i =1; i<nums.length; i++){
-        if(count === 0){
-            candidate = nums[i];
-            count = 1;
-        }else if(nums[i] === candidate){
-            count++;
-        }else{
-            count--;
-        }
+  for (let num of nums) {
+    info[num] = (info[num] || 0) + 1;
+  }
+
+  for (let key in info) {
+    if (info[key] > threshold) {
+      return Number(key);
     }
-
-    return candidate;
-
+  }
 };
